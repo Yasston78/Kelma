@@ -9,7 +9,7 @@ const APP_CONFIG = {
   tagline:      "Une parole par jour, de chez nous.",
   description:  "Une affirmation par jour, écrite pour la communauté franco-maghrébine. Motivation, fierté, identité — et un registre spirituel sourcé et vérifié, si tu le choisis.",
   year:         "2026",
-  contactEmail: "contact@kelma.app",   // ⚠️ à remplacer par une adresse qui existe
+  contactEmail: "contact@kelma.life",   // ⚠️ à créer chez ton registrar (redirection suffit)
 
   // ── ICÔNE ────────────────────────────────────────────────
   // Place ton icône dans /assets/ et indique le nom du fichier
