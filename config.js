@@ -13,7 +13,9 @@ const APP_CONFIG = {
 
   // ── ICÔNE ────────────────────────────────────────────────
   // Place ton icône dans /assets/ et indique le nom du fichier
-  iconFile: "assets/icon.png",   // ⚠️ le fichier n'existe pas encore
+  // Vide tant que l'icône n'existe pas : le template affiche l'image dès que
+  // ce champ est rempli, et pointerait sur un fichier absent.
+  iconFile: "",   // ⇢ remettre "assets/icon.png" une fois l'icône déposée
 
   // ── LIENS STORES ─────────────────────────────────────────
   // L'app n'est pas encore publiée : les boutons pointent dans le vide
