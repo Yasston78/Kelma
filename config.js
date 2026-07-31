@@ -5,93 +5,90 @@
 const APP_CONFIG = {
 
   // ── INFOS GÉNÉRALES ──────────────────────────────────────
-  appName:      "AppName",
-  tagline:      "Your App Tagline Here",
-  description:  "A short description of what your app does and the main value it brings to users. Keep it simple and clear.",
+  appName:      "Kelma",
+  tagline:      "Une parole par jour, de chez nous.",
+  description:  "Une affirmation par jour, écrite pour la communauté franco-maghrébine. Motivation, fierté, identité — et un registre spirituel sourcé et vérifié, si tu le choisis.",
   year:         "2026",
-  contactEmail: "contact@yourapp.com",
+  contactEmail: "contact@kelma.app",   // ⚠️ à remplacer par une adresse qui existe
 
   // ── ICÔNE ────────────────────────────────────────────────
   // Place ton icône dans /assets/ et indique le nom du fichier
-  iconFile: "assets/icon.png",   // ex: "assets/icon.png"
+  iconFile: "assets/icon.png",   // ⚠️ le fichier n'existe pas encore
 
   // ── LIENS STORES ─────────────────────────────────────────
-  appStoreUrl:  "https://apps.apple.com/YOUR_LINK",
-  playStoreUrl: "https://play.google.com/store/apps/YOUR_LINK",
+  // L'app n'est pas encore publiée : les boutons pointent dans le vide
+  // volontairement. À remplacer le jour de la sortie.
+  appStoreUrl:  "#",
+  playStoreUrl: "#",
 
   // ── COULEURS ─────────────────────────────────────────────
+  // Le site reste sombre : index.html code en dur un texte quasi blanc,
+  // un fond clair le rendrait illisible. Le fond sombre chaud met aussi
+  // en valeur les captures saumon de l'app.
   colors: {
-    accent:  "#6c63ff",   // couleur principale (boutons, highlights)
-    accent2: "#ff6584",   // couleur secondaire (dégradé titre)
-    bg:      "#0a0a0f",   // fond général
-    surface: "#13131a",   // fond des cartes
+    accent:  "#C4633F",   // terre cuite — boutons, highlights
+    accent2: "#D4A548",   // or — dégradé du titre
+    bg:      "#17100D",   // nuit chaude
+    surface: "#221812",   // fond des cartes
   },
 
   // ── FEATURES ─────────────────────────────────────────────
-  // Tu peux en ajouter ou en supprimer (max recommandé : 6)
   features: [
     {
-      icon:  "⚡",
-      title: "Feature One",
-      desc:  "Describe the first key feature of your app. What problem does it solve?"
+      icon:  "🕊️",
+      title: "Trois registres, ton choix",
+      desc:  "Spirituel, culturel ou les deux en alternance. Tu choisis à l'installation, et tu peux en changer."
     },
     {
-      icon:  "🎯",
-      title: "Feature Two",
-      desc:  "Describe the second key feature of your app. Focus on the benefit, not the technical detail."
+      icon:  "📖",
+      title: "Des sources, pas des approximations",
+      desc:  "Chaque verset et chaque invocation vient avec sa référence exacte, son texte arabe et sa translittération. Relu un par un."
     },
     {
-      icon:  "🔒",
-      title: "Feature Three",
-      desc:  "Describe the third key feature of your app. Keep it concise and user-friendly."
+      icon:  "🗣️",
+      title: "Ta langue, pas une traduction",
+      desc:  "Écrit en français avec les mots de chez nous. Darija marocaine, derja algérienne ou tounsi, selon ce qui te parle."
     },
     {
-      icon:  "📊",
-      title: "Feature Four",
-      desc:  "Describe the fourth key feature of your app. What makes your app stand out?"
-    },
-    {
-      icon:  "🌍",
-      title: "Feature Five",
-      desc:  "Describe the fifth key feature of your app. Think about what your users will love most."
+      icon:  "🔔",
+      title: "Un rappel par jour. Pas dix.",
+      desc:  "Tu choisis l'heure, tu reçois ta kelma. Aucune relance, aucune culpabilisation si tu sautes un jour."
     },
     {
       icon:  "💬",
-      title: "Feature Six",
-      desc:  "Describe the sixth key feature of your app. You can remove cards or add more as needed."
+      title: "Fait pour être envoyé",
+      desc:  "Une kelma qui te parle part sur WhatsApp en un geste, en image, prête à partager avec ta famille."
+    },
+    {
+      icon:  "🔒",
+      title: "Rien ne sort de ton téléphone",
+      desc:  "Pas de compte, pas de mot de passe, aucun serveur. Tes favoris et tes réglages restent chez toi, et l'app marche hors ligne."
     },
   ],
 
   // ── SCREENSHOTS ──────────────────────────────────────────
-  // Place tes screenshots dans /screenshots/ et liste les noms ici
-  // Laisser vide affiche des placeholders gris
-  screenshots: [
-    "screenshots/screen1.png",
-    "screenshots/screen2.png",
-    "screenshots/screen3.png",
-    "screenshots/screen4.png",
-    "screenshots/screen5.png",
-  ],
+  // Vide = placeholders gris. À remplir dès que l'app tourne sur un vrai
+  // téléphone : "screenshots/screen1.png", etc.
+  screenshots: [],
 
   // ── BADGE HERO ───────────────────────────────────────────
-  // Texte affiché dans la pastille en haut du hero
-  heroBadge: "✦ Available on iOS & Android",
+  heroBadge: "✦ Bientôt sur iOS et Android",
 
   // ── SECTIONS TITRES ──────────────────────────────────────
   sections: {
     features: {
-      label:    "Features",
-      title:    "Everything you need",
-      subtitle: "Describe your app's core value proposition here in one or two sentences.",
+      label:    "L'app",
+      title:    "Une parole qui te ressemble",
+      subtitle: "Kelma n'est pas une app de développement personnel traduite de l'anglais. Elle est écrite pour celles et ceux qui ont grandi entre deux rives.",
     },
     screenshots: {
-      label:    "Screenshots",
-      title:    "See it in action",
-      subtitle: "Replace these placeholders with real screenshots of your app.",
+      label:    "Aperçu",
+      title:    "À quoi ça ressemble",
+      subtitle: "Une kelma par jour, en plein écran, prête à être gardée ou partagée.",
     },
     download: {
-      title:    "Download AppName today",
-      subtitle: "Available for free on iOS and Android. No credit card required.",
+      title:    "Kelma arrive bientôt",
+      subtitle: "Gratuite sur iOS et Android. Sans compte, sans pub, sans collecte de données.",
     },
   },
 
