@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title id="page-title">AppName</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300&display=swap" rel="stylesheet"/>
   <script src="config.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -23,7 +22,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
       overflow-x: hidden;
@@ -159,7 +158,7 @@
       border-radius: 14px;
       font-size: 0.95rem;
       font-weight: 500;
-      font-family: 'Roboto', sans-serif;
+      font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
       text-decoration: none;
       transition: all 0.2s;
       cursor: pointer;
@@ -535,8 +534,8 @@
   <footer>
     <p id="footer-copy"></p>
     <div class="footer-links">
-      <a href="/privacy-policy.html">Privacy Policy</a>
-      <a href="/terms.html">Terms of Use</a>
+      <a href="/privacy-policy.html">Confidentialité</a>
+      <a href="/terms.html">Conditions d'utilisation</a>
       <a id="footer-email" href="#">Contact</a>
     </div>
   </footer>
@@ -554,7 +553,7 @@
     document.getElementById('nav-appname').textContent    = APP_CONFIG.appName;
     document.getElementById('hero-badge').textContent     = APP_CONFIG.heroBadge;
     document.getElementById('hero-desc').textContent      = APP_CONFIG.description;
-    document.getElementById('footer-copy').textContent    = `© ${APP_CONFIG.year} ${APP_CONFIG.appName}. All rights reserved.`;
+    document.getElementById('footer-copy').textContent    = `© ${APP_CONFIG.year} ${APP_CONFIG.appName}. Tous droits réservés.`;
     document.getElementById('footer-email').href          = `mailto:${APP_CONFIG.contactEmail}`;
     document.getElementById('footer-email').textContent   = 'Contact';
     document.getElementById('appstore-btn').href          = APP_CONFIG.appStoreUrl;
