@@ -3,7 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title id="page-title">AppName</title>
+  <!--
+    Ces balises sont volontairement écrites en dur plutôt que remplies par
+    config.js : les robots qui génèrent les aperçus de lien (WhatsApp,
+    Instagram, Twitter, Facebook) n'exécutent pas le JavaScript. Sans elles,
+    un lien partagé s'afficherait sans titre ni description.
+  -->
+  <title id="page-title">Kelma — Une parole par jour, de chez nous</title>
+  <meta name="description" content="Une affirmation par jour, écrite pour la communauté franco-maghrébine. Motivation, fierté, identité — et un registre spirituel sourcé et vérifié, si tu le choisis." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:site_name" content="Kelma" />
+  <meta property="og:url" content="https://kelma.life/" />
+  <meta property="og:title" content="Kelma — Une parole par jour, de chez nous" />
+  <meta property="og:description" content="Une affirmation par jour, écrite pour la communauté franco-maghrébine. Sans compte, sans pub, sans collecte de données." />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Kelma — Une parole par jour, de chez nous" />
+  <meta name="twitter:description" content="Une affirmation par jour, écrite pour la communauté franco-maghrébine. Sans compte, sans pub, sans collecte de données." />
+
+  <meta name="theme-color" content="#17100D" />
+
   <script src="config.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -549,7 +570,7 @@
     r.setProperty('--surface', APP_CONFIG.colors.surface);
 
     // ── General ──
-    document.title = APP_CONFIG.appName;
+    document.title = `${APP_CONFIG.appName} — ${APP_CONFIG.tagline.replace(/\.$/, '')}`;
     document.getElementById('nav-appname').textContent    = APP_CONFIG.appName;
     document.getElementById('hero-badge').textContent     = APP_CONFIG.heroBadge;
     document.getElementById('hero-desc').textContent      = APP_CONFIG.description;
