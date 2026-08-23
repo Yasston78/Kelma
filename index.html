@@ -1,644 +1,98 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <!--
-    Ces balises sont volontairement écrites en dur plutôt que remplies par
-    config.js : les robots qui génèrent les aperçus de lien (WhatsApp,
-    Instagram, Twitter, Facebook) n'exécutent pas le JavaScript. Sans elles,
-    un lien partagé s'afficherait sans titre ni description.
-  -->
-  <title id="page-title">Kelma — Une parole par jour, de chez nous</title>
-  <meta name="description" content="Une affirmation par jour, écrite pour la communauté franco-maghrébine. Motivation, fierté, identité — et un registre spirituel sourcé et vérifié, si tu le choisis." />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="fr_FR" />
-  <meta property="og:site_name" content="Kelma" />
-  <meta property="og:url" content="https://kelma.life/" />
-  <meta property="og:title" content="Kelma — Une parole par jour, de chez nous" />
-  <meta property="og:description" content="Une affirmation par jour, écrite pour la communauté franco-maghrébine. Sans compte, sans pub, sans collecte de données." />
-  <meta property="og:image" content="https://kelma.life/assets/og-image.png" />
-  <meta property="og:image:width" content="1200" />
-  <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Kelma — كلمة — Une parole par jour, de chez nous." />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Kelma — Une parole par jour, de chez nous" />
-  <meta name="twitter:description" content="Une affirmation par jour, écrite pour la communauté franco-maghrébine. Sans compte, sans pub, sans collecte de données." />
-  <meta name="twitter:image" content="https://kelma.life/assets/og-image.png" />
-
-  <link rel="icon" href="assets/icon.png" />
-  <link rel="apple-touch-icon" href="assets/icon.png" />
-
-  <meta name="theme-color" content="#17100D" />
-
-  <script src="config.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carnet Chantier — Photos, devis signés et factures en 1 clic</title>
+  <meta name="description" content="Carnet Chantier : le carnet tout-en-un des artisans du BTP. Photos illimitées, devis signés sur place, facture en 1 clic. 100% local — vos données restent sur votre téléphone.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Carnet Chantier">
+  <meta property="og:url" content="https://kelma.life/">
+  <meta property="og:title" content="Carnet Chantier — Photos, devis signés et factures en 1 clic">
+  <meta property="og:description" content="Le carnet tout-en-un des artisans du BTP. 100% local, aucune donnée collectée. Rejoignez la liste d'attente !">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Carnet Chantier">
+  <meta name="twitter:description" content="Le carnet tout-en-un des artisans du BTP. Rejoignez la liste d'attente !">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:      #0a0a0f;
-      --surface: #13131a;
-      --border:  rgba(255,255,255,0.08);
-      --accent:  #6c63ff;
-      --accent2: #ff6584;
-      --text:    #f0f0f5;
-      --muted:   #888899;
-      --radius:  20px;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 999;
-      opacity: 0.4;
-    }
-
-    /* ─── NAV ─── */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 24px 48px;
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(10,10,15,0.7);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .nav-logo img {
-      width: 32px; height: 32px;
-      border-radius: 8px;
-      object-fit: cover;
-      display: none;
-    }
-
-    .nav-links { display: flex; gap: 32px; list-style: none; }
-    .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--text); }
-
-    /* ─── HERO ─── */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 120px 24px 80px;
-      position: relative;
-    }
-
-    .hero-glow {
-      position: absolute;
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(108,99,255,0.2) 0%, transparent 70%);
-      top: 50%; left: 50%;
-      transform: translate(-50%, -60%);
-      pointer-events: none;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(108,99,255,0.12);
-      border: 1px solid rgba(108,99,255,0.3);
-      color: #a89cff;
-      font-size: 0.8rem;
-      font-weight: 500;
-      padding: 6px 16px;
-      border-radius: 999px;
-      margin-bottom: 28px;
-      letter-spacing: 0.3px;
-      animation: fadeUp 0.6s ease both;
-    }
-
-    .hero h1 {
-      font-size: clamp(3rem, 8vw, 6rem);
-      font-weight: 900;
-      line-height: 1.0;
-      letter-spacing: -2px;
-      margin-bottom: 24px;
-      animation: fadeUp 0.6s 0.1s ease both;
-    }
-
-    .hero h1 span {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero p {
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      color: var(--muted);
-      max-width: 520px;
-      line-height: 1.7;
-      margin-bottom: 40px;
-      font-weight: 300;
-      animation: fadeUp 0.6s 0.2s ease both;
-    }
-
-    .cta-group {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      justify-content: center;
-      animation: fadeUp 0.6s 0.3s ease both;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 28px;
-      border-radius: 14px;
-      font-size: 0.95rem;
-      font-weight: 500;
-      font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-      text-decoration: none;
-      transition: all 0.2s;
-      cursor: pointer;
-      border: none;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-      box-shadow: 0 0 30px rgba(108,99,255,0.4);
-    }
-    .btn-primary:hover {
-      filter: brightness(1.15);
-      transform: translateY(-2px);
-      box-shadow: 0 0 40px rgba(108,99,255,0.6);
-    }
-
-    .btn-secondary {
-      background: var(--surface);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .btn-secondary:hover {
-      border-color: rgba(255,255,255,0.2);
-      transform: translateY(-2px);
-    }
-
-    /* ─── PHONE MOCKUP ─── */
-    .mockup-wrap {
-      margin-top: 72px;
-      animation: fadeUp 0.8s 0.4s ease both;
-      position: relative;
-    }
-
-    .phone {
-      width: 240px; height: 490px;
-      background: var(--surface);
-      border-radius: 40px;
-      border: 2px solid rgba(255,255,255,0.12);
-      position: relative;
-      margin: 0 auto;
-      box-shadow:
-        0 40px 80px rgba(0,0,0,0.6),
-        0 0 0 1px rgba(255,255,255,0.04),
-        inset 0 1px 0 rgba(255,255,255,0.1);
-      overflow: hidden;
-    }
-
-    .phone-notch {
-      width: 90px; height: 24px;
-      background: var(--bg);
-      border-radius: 0 0 16px 16px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
-    }
-
-    .phone-screen {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      gap: 12px;
-    }
-
-    .phone-screen img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      position: absolute;
-      inset: 0;
-      border-radius: 38px;
-    }
-
-    .screen-placeholder {
-      width: 100%;
-      background: rgba(108,99,255,0.1);
-      border-radius: 12px;
-      border: 1px solid rgba(108,99,255,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(108,99,255,0.5);
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-    }
-    .screen-placeholder.tall  { height: 160px; }
-    .screen-placeholder.short { height: 60px; }
-    .screen-placeholder.med   { height: 90px; }
-
-    .phone-glow {
-      position: absolute;
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(108,99,255,0.15) 0%, transparent 70%);
-      bottom: -100px; left: 50%;
-      transform: translateX(-50%);
-      pointer-events: none;
-    }
-
-    /* ─── SECTIONS ─── */
-    section { padding: 100px 24px; }
-
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 16px;
-    }
-
-    .section-title {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 900;
-      letter-spacing: -1px;
-      margin-bottom: 16px;
-    }
-
-    .section-sub {
-      color: var(--muted);
-      font-size: 1rem;
-      font-weight: 300;
-      line-height: 1.7;
-      max-width: 480px;
-    }
-
-    /* ─── FEATURES ─── */
-    .features { max-width: 1100px; margin: 0 auto; }
-    .features-header { margin-bottom: 64px; }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-    }
-
-    .feature-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 36px;
-      transition: border-color 0.2s, transform 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-    .feature-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(108,99,255,0.4), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-    .feature-card:hover { border-color: rgba(108,99,255,0.3); transform: translateY(-4px); }
-    .feature-card:hover::before { opacity: 1; }
-
-    .feature-icon {
-      width: 48px; height: 48px;
-      background: rgba(108,99,255,0.12);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: 20px;
-    }
-
-    .feature-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
-    .feature-card p  { color: var(--muted); font-size: 0.9rem; line-height: 1.7; font-weight: 300; }
-
-    /* ─── SCREENSHOTS ─── */
-    .screenshots { max-width: 1100px; margin: 0 auto; }
-    .screenshots-header { margin-bottom: 64px; }
-
-    .screenshots-row {
-      display: flex;
-      gap: 20px;
-      overflow-x: auto;
-      padding-bottom: 16px;
-      scrollbar-width: none;
-    }
-    .screenshots-row::-webkit-scrollbar { display: none; }
-
-    .screenshot {
-      flex-shrink: 0;
-      width: 180px; height: 360px;
-      background: var(--surface);
-      border-radius: 24px;
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      color: var(--muted);
-      letter-spacing: 0.5px;
-      font-weight: 500;
-      overflow: hidden;
-      transition: transform 0.2s;
-    }
-    .screenshot img { width: 100%; height: 100%; object-fit: cover; }
-    .screenshot:hover { transform: translateY(-8px) scale(1.02); }
-    .screenshot:nth-child(2) { margin-top: 30px; }
-    .screenshot:nth-child(4) { margin-top: 30px; }
-
-    /* ─── DOWNLOAD ─── */
-    .download-section { max-width: 700px; margin: 0 auto; text-align: center; }
-
-    .download-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 32px;
-      padding: 64px 48px;
-      position: relative;
-      overflow: hidden;
-    }
-    .download-card::before {
-      content: '';
-      position: absolute;
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(108,99,255,0.15) 0%, transparent 70%);
-      top: -100px; right: -100px;
-      pointer-events: none;
-    }
-
-    .download-card h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 900; letter-spacing: -1px; margin-bottom: 16px; }
-    .download-card p  { color: var(--muted); margin-bottom: 40px; font-weight: 300; line-height: 1.7; }
-
-    .store-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-
-    .store-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px 24px;
-      text-decoration: none;
-      color: var(--text);
-      transition: all 0.2s;
-    }
-    .store-btn:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); transform: translateY(-2px); }
-    .store-btn-icon { font-size: 1.8rem; }
-    .store-btn-text { text-align: left; }
-    .store-btn-text span   { display: block; font-size: 0.7rem; color: var(--muted); font-weight: 400; }
-    .store-btn-text strong { font-size: 1rem; font-weight: 600; }
-
-    /* ─── FOOTER ─── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 48px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    footer p { color: var(--muted); font-size: 0.85rem; }
-    footer a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
-    footer a:hover { color: var(--text); }
-    .footer-links { display: flex; gap: 24px; }
-
-    /* ─── ANIMATIONS ─── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ─── RESPONSIVE ─── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F5F7FA; color: #1B2A4A; }
+    header { background: #1B2A4A; padding: 16px 24px; color: #fff; display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 17px; }
+    nav a { color: #fff; text-decoration: none; font-size: 14px; font-weight: 600; background: #F5A623; color: #1B2A4A; padding: 8px 16px; border-radius: 8px; }
+    .hero { text-align: center; padding: 56px 24px 40px; max-width: 720px; margin: 0 auto; }
+    .badge { background: #FFF3E0; color: #B7791F; font-size: 13px; font-weight: 700; border-radius: 20px; padding: 6px 14px; display: inline-block; margin-bottom: 20px; }
+    h1 { font-size: 36px; line-height: 1.2; margin-bottom: 16px; }
+    h1 em { color: #F5A623; font-style: normal; }
+    .sous { font-size: 17px; color: #5A6B85; line-height: 1.55; margin-bottom: 28px; }
+    .cta { display: inline-block; background: #F5A623; color: #1B2A4A; font-size: 17px; font-weight: 800; border-radius: 12px; padding: 15px 30px; text-decoration: none; }
+    .cta:hover { background: #E8960F; }
+    .cta-sous { margin-top: 12px; font-size: 13px; color: #8A96A8; }
+    .features { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; padding: 24px 20px; max-width: 900px; margin: 0 auto; }
+    .feat { background: #fff; border: 1px solid #E2E8F0; border-radius: 14px; padding: 18px 20px; width: 200px; text-align: center; }
+    .feat .ico { font-size: 28px; margin-bottom: 8px; }
+    .feat b { display: block; font-size: 15px; margin-bottom: 4px; }
+    .feat span { font-size: 13px; color: #5A6B85; line-height: 1.4; }
+    .shots { padding: 40px 20px; text-align: center; }
+    .shots h2 { font-size: 24px; margin-bottom: 8px; }
+    .shots p { color: #5A6B85; margin-bottom: 24px; }
+    .shots-grid { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .shots-grid img { height: 380px; border-radius: 16px; box-shadow: 0 10px 30px rgba(27,42,74,0.15); border: 1px solid #E2E8F0; }
+    .waitlist-band { background: #1B2A4A; color: #fff; text-align: center; padding: 44px 24px; }
+    .waitlist-band h2 { font-size: 24px; margin-bottom: 10px; }
+    .waitlist-band p { color: #B9C4D8; margin-bottom: 22px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .waitlist-band a { display: inline-block; background: #F5A623; color: #1B2A4A; font-size: 16px; font-weight: 800; border-radius: 12px; padding: 14px 28px; text-decoration: none; }
+    footer { padding: 22px; text-align: center; font-size: 12px; color: #8A96A8; }
+    footer a { color: #8A96A8; margin: 0 8px; }
     @media (max-width: 640px) {
-      nav { padding: 20px 24px; }
-      .nav-links { display: none; }
-      footer { flex-direction: column; text-align: center; }
+      h1 { font-size: 28px; }
+      .feat { width: 100%; max-width: 300px; }
+      .shots-grid img { height: 300px; }
     }
   </style>
 </head>
 <body>
+  <header>
+    <div class="logo">🏗️ Carnet Chantier</div>
+    <nav><a href="/waitlist.html">📋 Liste d'attente</a></nav>
+  </header>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#" class="nav-logo">
-      <img id="nav-icon" src="" alt="icon"/>
-      <span id="nav-appname"></span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="#features">Features</a></li>
-      <li><a href="#screenshots">Screenshots</a></li>
-      <li><a href="#download">Download</a></li>
-    </ul>
-  </nav>
-
-  <!-- HERO -->
   <section class="hero">
-    <div class="hero-glow"></div>
-    <div class="badge" id="hero-badge"></div>
-    <h1 id="hero-title"></h1>
-    <p id="hero-desc"></p>
-    <div class="cta-group">
-      <a href="/waitlist.html" class="btn btn-primary">📋 Rejoindre la liste d'attente</a>
-      <a href="#features" class="btn btn-secondary">Learn More →</a>
-    </div>
-    <div class="mockup-wrap">
-      <div class="phone">
-        <div class="phone-notch"></div>
-        <div class="phone-screen" id="phone-screen">
-          <div class="screen-placeholder tall">SCREENSHOT 1</div>
-          <div class="screen-placeholder short">SCREENSHOT 2</div>
-          <div class="screen-placeholder med">SCREENSHOT 3</div>
-        </div>
-      </div>
-      <div class="phone-glow"></div>
+    <div class="badge">🚀 Bientôt disponible — Test en cours</div>
+    <h1>Le carnet de chantier <em>qui facture</em> — photos, devis signés et factures en 1 clic.</h1>
+    <p class="sous">Pensé pour les artisans du BTP : tout se passe sur votre téléphone, vos données restent chez vous. Zéro compte, zéro collecte, zéro pub.</p>
+    <a class="cta" href="/waitlist.html">📋 Rejoindre la liste d'attente</a>
+    <div class="cta-sous">Gratuit à tester · Soyez prévenu en premier à la sortie</div>
+  </section>
+
+  <section class="features">
+    <div class="feat"><div class="ico">📸</div><b>Photos illimitées</b><span>Chaque chantier avec ses photos, avant/après, repères.</span></div>
+    <div class="feat"><div class="ico">✍️</div><b>Devis signés sur place</b><span>Le client signe du doigt, tout de suite, sur le chantier.</span></div>
+    <div class="feat"><div class="ico">🧾</div><b>Facture en 1 clic</b><span>Le devis signé devient facture. Numérotation automatique.</span></div>
+    <div class="feat"><div class="ico">🔒</div><b>100 % local</b><span>Aucune donnée envoyée. Vos documents restent sur votre téléphone.</span></div>
+  </section>
+
+  <section class="shots">
+    <h2>Simple, pensé pour le terrain</h2>
+    <p>Conçu avec et pour des artisans : chaque écran est une action utile.</p>
+    <div class="shots-grid">
+      <img src="assets/screenshots/01-mes-chantiers.png" alt="Liste des chantiers">
+      <img src="assets/screenshots/02-detail-chantier.png" alt="Détail d'un chantier">
+      <img src="assets/screenshots/03-devis-signe.png" alt="Devis signé">
+      <img src="assets/screenshots/04-signature.png" alt="Signature client">
+      <img src="assets/screenshots/05-facture.png" alt="Facture">
     </div>
   </section>
 
-  <!-- FEATURES -->
-  <section id="features">
-    <div class="features">
-      <div class="features-header">
-        <p class="section-label" id="features-label"></p>
-        <h2 class="section-title" id="features-title"></h2>
-        <p class="section-sub" id="features-sub"></p>
-      </div>
-      <div class="features-grid" id="features-grid"></div>
-    </div>
+  <section class="waitlist-band">
+    <h2>Bientôt disponible</h2>
+    <p>Rejoignez la liste d'attente et soyez prévenu(e) en premier à la sortie de Carnet Chantier.</p>
+    <a href="/waitlist.html">📋 Je m'inscris (30 secondes)</a>
   </section>
 
-  <!-- SCREENSHOTS -->
-  <section id="screenshots">
-    <div class="screenshots">
-      <div class="screenshots-header">
-        <p class="section-label" id="screenshots-label"></p>
-        <h2 class="section-title" id="screenshots-title"></h2>
-        <p class="section-sub" id="screenshots-sub"></p>
-      </div>
-      <div class="screenshots-row" id="screenshots-row"></div>
-    </div>
-  </section>
-
-  <!-- DOWNLOAD -->
-  <section id="download">
-    <div class="download-section">
-      <div class="download-card">
-        <h2 id="download-title"></h2>
-        <p id="download-sub"></p>
-        <div class="store-buttons">
-          <a id="appstore-btn" href="#" class="store-btn">
-            <span class="store-btn-icon">🍎</span>
-            <div class="store-btn-text">
-              <span>Download on the</span>
-              <strong>App Store</strong>
-            </div>
-          </a>
-          <a id="playstore-btn" href="#" class="store-btn">
-            <span class="store-btn-icon">▶</span>
-            <div class="store-btn-text">
-              <span>Get it on</span>
-              <strong>Google Play</strong>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
   <footer>
-    <p id="footer-copy"></p>
-    <div class="footer-links">
-      <a href="/privacy-policy.html">Confidentialité</a>
-      <a href="/terms.html">Conditions d'utilisation</a>
-      <a id="footer-email" href="#">Contact</a>
-    </div>
+    <a href="/politique-confidentialite.html">Politique de confidentialité</a>
+    <a href="/terms.html">Conditions d'utilisation</a>
   </footer>
-
-  <script>
-    // ── Apply CSS variables from config ──
-    const r = document.documentElement.style;
-    r.setProperty('--accent',  APP_CONFIG.colors.accent);
-    r.setProperty('--accent2', APP_CONFIG.colors.accent2);
-    r.setProperty('--bg',      APP_CONFIG.colors.bg);
-    r.setProperty('--surface', APP_CONFIG.colors.surface);
-
-    // ── General ──
-    document.title = `${APP_CONFIG.appName} — ${APP_CONFIG.tagline.replace(/\.$/, '')}`;
-    document.getElementById('nav-appname').textContent    = APP_CONFIG.appName;
-    document.getElementById('hero-badge').textContent     = APP_CONFIG.heroBadge;
-    document.getElementById('hero-desc').textContent      = APP_CONFIG.description;
-    document.getElementById('footer-copy').textContent    = `© ${APP_CONFIG.year} ${APP_CONFIG.appName}. Tous droits réservés.`;
-    document.getElementById('footer-email').href          = `mailto:${APP_CONFIG.contactEmail}`;
-    document.getElementById('footer-email').textContent   = 'Contact';
-    document.getElementById('appstore-btn').href          = APP_CONFIG.appStoreUrl;
-    document.getElementById('playstore-btn').href         = APP_CONFIG.playStoreUrl;
-
-    // ── Hero title ──
-    const parts = APP_CONFIG.tagline.split(' ');
-    const half  = Math.ceil(parts.length / 2);
-    const line1 = parts.slice(0, half).join(' ');
-    const line2 = parts.slice(half).join(' ');
-    document.getElementById('hero-title').innerHTML =
-      `${line1}<br/><span>${line2 || APP_CONFIG.appName}</span>`;
-
-    // ── Icon ──
-    if (APP_CONFIG.iconFile) {
-      const img = document.getElementById('nav-icon');
-      img.src   = APP_CONFIG.iconFile;
-      img.style.display = 'block';
-    }
-
-    // ── Sections text ──
-    document.getElementById('features-label').textContent    = APP_CONFIG.sections.features.label;
-    document.getElementById('features-title').textContent    = APP_CONFIG.sections.features.title;
-    document.getElementById('features-sub').textContent      = APP_CONFIG.sections.features.subtitle;
-    document.getElementById('screenshots-label').textContent = APP_CONFIG.sections.screenshots.label;
-    document.getElementById('screenshots-title').textContent = APP_CONFIG.sections.screenshots.title;
-    document.getElementById('screenshots-sub').textContent   = APP_CONFIG.sections.screenshots.subtitle;
-    document.getElementById('download-title').textContent    = APP_CONFIG.sections.download.title;
-    document.getElementById('download-sub').textContent      = APP_CONFIG.sections.download.subtitle;
-
-    // ── Features grid ──
-    const grid = document.getElementById('features-grid');
-    APP_CONFIG.features.forEach(f => {
-      grid.innerHTML += `
-        <div class="feature-card">
-          <div class="feature-icon">${f.icon}</div>
-          <h3>${f.title}</h3>
-          <p>${f.desc}</p>
-        </div>`;
-    });
-
-    // ── Screenshots ──
-    const row = document.getElementById('screenshots-row');
-    if (APP_CONFIG.screenshots.length > 0) {
-      APP_CONFIG.screenshots.forEach(src => {
-        row.innerHTML += `<div class="screenshot"><img src="${src}" alt="screenshot"/></div>`;
-      });
-      // Use first screenshot in phone mockup
-      document.getElementById('phone-screen').innerHTML =
-        `<img src="${APP_CONFIG.screenshots[0]}" alt="app screen"/>`;
-    } else {
-      for (let i = 1; i <= 5; i++) {
-        row.innerHTML += `<div class="screenshot">Screen ${i}</div>`;
-      }
-    }
-  </script>
-
 </body>
 </html>
