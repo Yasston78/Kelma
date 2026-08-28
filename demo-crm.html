@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nehams Consulting — CRM Démo</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif; background:#F4F6F8; color:#1B2A4A; }
+  header { background:#1B2A4A; color:#fff; padding:18px 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; }
+  header h1 { font-size:19px; }
+  header .badge { background:#F5A623; color:#1B2A4A; font-weight:800; font-size:12px; border-radius:20px; padding:5px 12px; }
+  .wrap { max-width:960px; margin:0 auto; padding:20px 16px 60px; }
+  .stats { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-bottom:20px; }
+  .stat { background:#fff; border-radius:14px; padding:14px 16px; border:1px solid #E2E8F0; }
+  .stat .n { font-size:26px; font-weight:800; }
+  .stat .l { font-size:12px; color:#5A6B85; }
+  .stat.hot { border-color:#F5A623; background:#FFF8ED; }
+  .filtres { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+  .filtre { background:#fff; border:1.5px solid #D5DBE3; border-radius:20px; padding:8px 16px; font-size:13px; font-weight:700; cursor:pointer; color:#5A6B85; }
+  .filtre.actif { background:#1B2A4A; color:#fff; border-color:#1B2A4A; }
+  .lead { background:#fff; border:1px solid #E2E8F0; border-radius:14px; padding:14px 16px; margin-bottom:10px; display:flex; align-items:center; gap:12px; cursor:pointer; transition:box-shadow .15s; }
+  .lead:hover { box-shadow:0 4px 14px rgba(27,42,74,.12); }
+  .lead .avatar { width:42px; height:42px; border-radius:50%; background:#E8F0FE; color:#1B2A4A; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:15px; flex-shrink:0; }
+  .lead .infos { flex:1; min-width:0; }
+  .lead .nom { font-weight:800; font-size:15px; }
+  .lead .meta { font-size:12.5px; color:#5A6B85; }
+  .score { font-weight:800; font-size:15px; padding:6px 10px; border-radius:10px; flex-shrink:0; }
+  .s90 { background:#E8F7EE; color:#1E7A46; } .s70 { background:#FFF3E0; color:#B7791F; } .s50 { background:#FDECEC; color:#B23B3B; }
+  .statut { font-size:11px; font-weight:700; border-radius:6px; padding:3px 8px; }
+  .st-nouveau { background:#E8F0FE; color:#1B2A4A; } .st-relance { background:#FFF3E0; color:#B7791F; } .st-rdv { background:#E8F7EE; color:#1E7A46; } .st-chaud { background:#FDECEC; color:#B23B3B; } .st-transac { background:#F0EAFB; color:#6B3FA0; }
+  .flag { font-size:11px; font-weight:800; color:#B23B3B; background:#FDECEC; border-radius:6px; padding:3px 7px; }
+  .pipeline { background:#fff; border:1px solid #E2E8F0; border-radius:14px; padding:16px; margin-top:22px; }
+  .pipeline h3 { font-size:14px; margin-bottom:12px; }
+  .steps { display:flex; gap:8px; flex-wrap:wrap; }
+  .step { flex:1; min-width:130px; background:#F8FAFC; border:1.5px dashed #C6CFDA; border-radius:12px; padding:12px; font-size:12.5px; text-align:center; }
+  .step b { display:block; font-size:13px; margin-bottom:4px; color:#1B2A4A; }
+  .step.auto { background:#FFF8ED; border-color:#F5A623; }
+  .modal-fond { position:fixed; inset:0; background:rgba(0,0,0,.5); display:none; align-items:center; justify-content:center; padding:20px; z-index:50; }
+  .modal { background:#fff; border-radius:18px; max-width:520px; width:100%; max-height:88vh; overflow:auto; padding:24px; }
+  .modal h2 { font-size:19px; margin-bottom:2px; }
+  .modal .sous { color:#5A6B85; font-size:13px; margin-bottom:16px; }
+  .barre { height:8px; background:#EEF1F5; border-radius:6px; overflow:hidden; margin:4px 0 10px; }
+  .barre > div { height:100%; background:#F5A623; }
+  .score-ligne { display:flex; justify-content:space-between; font-size:13.5px; margin-top:8px; }
+  .action { background:#FFF8ED; border:1px solid #F5A623; border-radius:12px; padding:12px 14px; margin-top:14px; font-size:13.5px; }
+  .hist { margin-top:14px; font-size:12.5px; color:#5A6B85; }
+  .hist div { padding:4px 0; border-bottom:1px solid #F0F2F5; }
+  .fermer { margin-top:16px; background:#1B2A4A; color:#fff; border:none; border-radius:10px; padding:12px; font-size:14px; font-weight:700; width:100%; cursor:pointer; }
+  footer { text-align:center; font-size:12px; color:#8A96A8; padding:16px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🏠 Nehams Consulting — CRM</h1>
+  <span class="badge">DÉMO — nouveau CRM</span>
+</header>
+<div class="wrap">
+  <div class="stats">
+    <div class="stat"><div class="n" id="st-total">8</div><div class="l">Leads actifs</div></div>
+    <div class="stat hot"><div class="n" id="st-relance">3</div><div class="l">À relancer (J-3)</div></div>
+    <div class="stat"><div class="n" id="st-rdv">4</div><div class="l">RDV cette semaine</div></div>
+    <div class="stat"><div class="n" id="st-vendeurs">3</div><div class="l">Vendeurs</div></div>
+  </div>
+
+  <div class="filtres">
+    <div class="filtre actif" data-f="tous">Tous</div>
+    <div class="filtre" data-f="relance">🔥 À relancer</div>
+    <div class="filtre" data-f="rdv">📅 RDV</div>
+    <div class="filtre" data-f="vendeurs">🏠 Vendeurs</div>
+  </div>
+  <div id="liste"></div>
+
+  <div class="pipeline">
+    <h3>⚙️ Le flux automatique (ce qui se passe sans vous)</h3>
+    <div class="steps">
+      <div class="step"><b>📥 Capture</b>Leads (téléphone, site, réseaux) → base</div>
+      <div class="step auto"><b>🤖 Scoring</b>Financement · Budget · RDV → score /100</div>
+      <div class="step auto"><b>📧 Relance auto</b>J+3 puis J+7 si pas de réponse</div>
+      <div class="step auto"><b>📲 Alerte Telegram</b>Dossier chaud → notification immédiate</div>
+      <div class="step"><b>✅ Transaction</b>Suivi jusqu'à la signature</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-fond" id="modal">
+  <div class="modal" id="modalCarte"></div>
+</div>
+<footer>Prototype de démonstration — données fictives · Airtable + n8n + Mailjet + Telegram</footer>
+
+<script>
+const LEADS = [
+  { id:1, nom:"Karim B.", type:"Acheteur", statut:"chaud", statutLabel:"🔥 Chaud", score:92, financement:40, budget:30, rdv:22,
+    meta:"Financement validé · Budget 250 k€ · RDV pris vendredi", rang:"Smahen",
+    action:"Prochaine action auto : préparation du RDV vendredi 9h30 (alerte envoyée sur Telegram)", 
+    hist:["J-1 : RDV confirmé par SMS auto","J-7 : budget confirmé par téléphone","J-12 : financement validé (relance auto J+3)","J-20 : lead capturé via formulaire site"]},
+  { id:2, nom:"Patrick D.", type:"Vendeur", statut:"rdv", statutLabel:"📅 RDV", score:78, financement:0, budget:30, rdv:20,
+    meta:"Estimation faite · RDV signature mandat jeudi", rang:"Safia",
+    action:"Prochaine action auto : rappel RDV mandat jeudi 14h (Telegram)",
+    hist:["J-2 : RDV mandat confirmé","J-9 : estimation envoyée + suivi","J-15 : premier contact (formulaire site)"]},
+  { id:3, nom:"Fatima Z.", type:"Acheteuse", statut:"relance", statutLabel:"⏰ À relancer", score:60, financement:25, budget:20, rdv:15,
+    meta:"Budget 210 k€ · financement en cours · visite faite il y a 5 jours", rang:"Smahen",
+    action:"Prochaine action auto : relance J+5 programmée demain 10h (email + SMS)",
+    hist:["J-5 : visite effectuée","J-10 : financement en cours","J-16 : lead capturé"]},
+  { id:4, nom:"Nadia R.", type:"Acheteuse", statut:"nouveau", statutLabel:"✨ Nouveau", score:30, financement:10, budget:10, rdv:0,
+    meta:"Capturée ce matin · recherche 2 pièces Lyon 3e", rang:"Safia",
+    action:"Prochaine action auto : email de bienvenue + appel de qualification (aujourd'hui)",
+    hist:["Ce matin : lead capturé via formulaire site → score calculé → alerte Telegram envoyée"]},
+  { id:5, nom:"Thomas V.", type:"Vendeur", statut:"transac", statutLabel:"✅ Transaction", score:85, financement:0, budget:35, rdv:20,
+    meta:"Compromis signé · échéance notaire 15 octobre", rang:"Smahen",
+    action:"Prochaine action auto : rappel échéance notaire (J-15)",
+    hist:["J-30 : compromis signé","J-45 : offre acceptée","J-60 : mandat signé"]},
+  { id:6, nom:"Marie L.", type:"Vendeuse", statut:"relance", statutLabel:"⏰ À relancer", score:55, financement:0, budget:25, rdv:10,
+    meta:"Estimation demandée · 3 relances auto déjà envoyées", rang:"Safia",
+    action:"Prochaine action auto : dernière relance J+7 demain 9h — si sans réponse, passage en « froid »",
+    hist:["J+7 : 3e relance auto","J+3 : 2e relance auto","J+1 : 1re relance auto","J0 : estimation demandée"]},
+  { id:7, nom:"Sofiane T.", type:"Acheteur", statut:"nouveau", statutLabel:"✨ Nouveau", score:40, financement:15, budget:15, rdv:0,
+    meta:"Demande reçue hier · financement à vérifier · budget 300 k€", rang:"Smahen",
+    action:"Prochaine action auto : relance J+1 aujourd'hui 17h",
+    hist:["Hier : lead capturé (Instagram) → score calculé"]},
+  { id:8, nom:"Leïla M.", type:"Acheteuse", statut:"rdv", statutLabel:"📅 RDV", score:48, financement:20, budget:15, rdv:13,
+    meta:"Budget à confirmer · visite prévue samedi 10h", rang:"Safia",
+    action:"Prochaine action auto : rappel de visite samedi 10h (SMS)",
+    hist:["J-3 : RDV visite confirmé","J-8 : budget à confirmer","J-15 : lead capturé"]},
+];
+
+const FILTRES = { tous:()=>true, relance:l=>l.statut==='relance'||l.statut==='chaud', rdv:l=>l.statut==='rdv'||l.statut==='transac', vendeurs:l=>l.type==='Vendeur'||l.type==='Vendeuse' };
+const CLASSE = { s90:'s90', s70:'s70', s50:'s50' };
+function classeScore(s){ return s>=80?'s90':(s>=60?'s70':'s50'); }
+function avatar(n){ return n.split(' ').map(w=>w[0]).join('').slice(0,2); }
+function statutBadge(l){ return `<span class="statut st-${l.statut}">${l.statutLabel}</span>`; }
+
+function afficher(f='tous'){
+  const liste = document.getElementById('liste');
+  liste.innerHTML = LEADS.filter(FILTRES[f]).map(l=>`
+    <div class="lead" onclick="ouvrir(${l.id})">
+      <div class="avatar">${avatar(l.nom)}</div>
+      <div class="infos">
+        <div class="nom">${l.nom} ${l.type==='Vendeur'||l.type==='Vendeuse'?'🏠':''} ${statutBadge(l)}</div>
+        <div class="meta">${l.meta}</div>
+      </div>
+      ${l.statut==='relance'||l.statut==='chaud'?'<span class="flag">🔥 J-3</span>':''}
+      <div class="score ${classeScore(l.score)}">${l.score}</div>
+    </div>`).join('') || '<p style="color:#8A96A8;text-align:center;padding:30px">Aucun lead dans cette vue.</p>';
+}
+function ouvrir(id){
+  const l = LEADS.find(x=>x.id===id);
+  document.getElementById('modalCarte').innerHTML = `
+    <h2>${l.nom} ${l.type==='Vendeur'||l.type==='Vendeuse'?'🏠':''}</h2>
+    <div class="sous">${l.meta} · Géré par ${l.rang}</div>
+    <div class="score-ligne"><b>Score global</b><span class="score ${classeScore(l.score)}">${l.score}/100</span></div>
+    <div class="barre"><div style="width:${l.score}%"></div></div>
+    <div class="score-ligne"><span>Financement</span><b>${l.financement}/40</b></div>
+    <div class="barre"><div style="width:${l.financement/40*100}%"></div></div>
+    <div class="score-ligne"><span>Budget</span><b>${l.budget}/35</b></div>
+    <div class="barre"><div style="width:${l.budget/35*100}%"></div></div>
+    <div class="score-ligne"><span>Rendez-vous</span><b>${l.rdv}/25</b></div>
+    <div class="barre"><div style="width:${l.rdv/25*100}%"></div></div>
+    <div class="action">⚙️ ${l.action}</div>
+    <div class="hist">${l.hist.map(h=>`<div>🕐 ${h}</div>`).join('')}</div>
+    <button class="fermer" onclick="fermer()">Fermer</button>`;
+  document.getElementById('modal').style.display='flex';
+}
+function fermer(){ document.getElementById('modal').style.display='none'; }
+document.querySelectorAll('.filtre').forEach(f=>f.addEventListener('click',()=>{
+  document.querySelectorAll('.filtre').forEach(x=>x.classList.remove('actif'));
+  f.classList.add('actif'); afficher(f.dataset.f);
+}));
+document.getElementById('modal').addEventListener('click',e=>{ if(e.target.id==='modal') fermer(); });
+afficher();
+</script>
+</body>
+</html>
