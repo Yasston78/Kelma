@@ -17,9 +17,18 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F5F7FA; color: #1B2A4A; }
-    header { background: #1B2A4A; padding: 16px 24px; color: #fff; display: flex; align-items: center; justify-content: space-between; }
-    .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 17px; }
-    nav a { color: #fff; text-decoration: none; font-size: 14px; font-weight: 600; background: #F5A623; color: #1B2A4A; padding: 8px 16px; border-radius: 8px; }
+    header { background: #1B2A4A; padding: 14px 20px; color: #fff; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .logo { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 16px; white-space: nowrap; }
+    .logo .ico { font-size: 20px; }
+    nav { display: flex; align-items: center; gap: 8px; }
+    nav a { color: #fff; text-decoration: none; font-size: 13px; font-weight: 700; padding: 7px 12px; border-radius: 8px; white-space: nowrap; }
+    nav a.blog { background: rgba(255,255,255,0.12); color: #fff; }
+    nav a.cta { background: #F5A623; color: #1B2A4A; }
+    @media (max-width: 480px) {
+      .logo { font-size: 14px; }
+      nav a { font-size: 12px; padding: 6px 9px; }
+      .logo span.nom { max-width: 130px; overflow: hidden; text-overflow: ellipsis; }
+    }
     .hero { text-align: center; padding: 56px 24px 40px; max-width: 720px; margin: 0 auto; }
     .badge { background: #FFF3E0; color: #B7791F; font-size: 13px; font-weight: 700; border-radius: 20px; padding: 6px 14px; display: inline-block; margin-bottom: 20px; }
     h1 { font-size: 36px; line-height: 1.2; margin-bottom: 16px; }
@@ -53,8 +62,8 @@
 </head>
 <body>
   <header>
-    <div class="logo">🏗️ Carnet Chantier</div>
-    <nav><a style="background:transparent;color:#fff" href="/blog/">📚 Blog</a><a href="/waitlist.html">📋 Liste d'attente</a></nav>
+    <div class="logo"><span class="ico">🏗️</span><span class="nom">Carnet Chantier</span></div>
+    <nav><a class="blog" href="/blog/">Blog</a><a class="cta" href="/waitlist.html">Liste d'attente</a></nav>
   </header>
 
   <section class="hero">
