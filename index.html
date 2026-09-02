@@ -99,9 +99,45 @@
     <a href="https://play.google.com/store/apps/details?id=com.carnetchantier">⬇️ Télécharger sur Google Play</a>
   </section>
 
+  
+  <!-- 💬 Avis bêta -->
+  <section id="avis" style="max-width:760px;margin:0 auto 60px;padding:0 20px">
+    <div style="text-align:center;font-size:12px;font-weight:800;color:#F5A623;letter-spacing:2px;margin-bottom:6px">VERSION BÊTA</div>
+    <h2 style="font-size:26px;color:#1B2A4A;text-align:center;margin-bottom:8px">💬 Votre avis construit l'app</h2>
+    <p style="text-align:center;color:#5C6E68;font-size:15px;margin-bottom:22px">Un souci ? Une idée ? <b>On lit tout</b> — dites-nous quoi améliorer.</p>
+    <div style="background:#fff;border:1px solid #E3E8EF;border-radius:18px;padding:22px">
+      <textarea id="ccMsg" rows="2" placeholder="Ce qui pourrait être mieux…" style="width:100%;border:1px solid #DDE3EA;border-radius:10px;padding:12px;font-size:14px;font-family:inherit;margin-bottom:10px;resize:vertical"></textarea>
+      <textarea id="ccSugg" rows="2" placeholder="Une fonctionnalité que tu aimerais…" style="width:100%;border:1px solid #DDE3EA;border-radius:10px;padding:12px;font-size:14px;font-family:inherit;margin-bottom:10px;resize:vertical"></textarea>
+      <input id="ccEmail" type="email" placeholder="Ton email (optionnel)" style="width:100%;border:1px solid #DDE3EA;border-radius:10px;padding:12px;font-size:14px;font-family:inherit;margin-bottom:12px">
+      <button id="btnCcAvis" style="width:100%;background:#F5A623;color:#1B2A4A;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:800;cursor:pointer">Envoyer mon avis</button>
+      <div id="ccOk" style="display:none;text-align:center;background:#FEF3DF;color:#1B2A4A;border-radius:10px;padding:12px;margin-top:12px;font-weight:700">✅ Merci ! Votre avis est bien arrivé 🙏</div>
+    </div>
+  </section>
+
   <footer>
     <a href="/politique-confidentialite.html">Politique de confidentialité</a>
     <a href="/terms.html">Conditions d'utilisation</a>
   </footer>
+<script>
+  document.getElementById('btnCcAvis').onclick = async () => {
+    const msg = document.getElementById('ccMsg').value.trim();
+    const sugg = document.getElementById('ccSugg').value.trim();
+    const email = document.getElementById('ccEmail').value.trim();
+    const b = document.getElementById('btnCcAvis');
+    if (!msg && !sugg) { alert('Écrivez un retour ou une idée avant d\'envoyer.'); return; }
+    b.textContent = 'Envoi…';
+    try {
+      await fetch('https://stats.idvalide.fr/feedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: msg, suggestion: sugg, email: email, source: 'cc' }),
+      });
+      document.getElementById('ccOk').style.display = 'block';
+      document.getElementById('ccMsg').value = '';
+      document.getElementById('ccSugg').value = '';
+    } catch { alert('Envoi impossible — réessayez plus tard.'); }
+    b.textContent = 'Envoyer mon avis';
+  };
+</script>
 </body>
 </html>
