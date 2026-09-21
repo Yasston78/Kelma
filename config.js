@@ -9,7 +9,7 @@ const APP_CONFIG = {
   tagline:      "Le carnet de chantier qui facture.",
   description:  "Une affirmation par jour, écrite pour la communauté franco-maghrébine. Motivation, fierté, identité — et un registre spirituel sourcé et vérifié, si tu le choisis.",
   year:         "2026",
-  contactEmail: "contact@kelma.life",   // ⚠️ à créer chez ton registrar (redirection suffit)
+  contactEmail: "contact@carnet-chantier.fr",   // ⚠️ à créer chez ton registrar (redirection suffit)
 
   // ── ICÔNE ────────────────────────────────────────────────
   // Place ton icône dans /assets/ et indique le nom du fichier
